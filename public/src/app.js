@@ -3,5 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css/normalize.css';
 import './styles/styles.sass';
+import AppRouter from './routers/AppRouter';
 
-ReactDOM.render(<p>This is react-starter-app</p>, document.querySelector("#app"));
+
+ReactDOM.render(<AppRouter />, document.querySelector("#app"));
