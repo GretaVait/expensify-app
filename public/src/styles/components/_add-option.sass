@@ -1,0 +1,29 @@
+.add-option
+
+  &__error
+    color: $off-white
+    font-style: italic
+    margin: $m-size 0 0 0
+    padding: 0 $m-size
+
+  &__form
+    display: flex
+    flex-direction: column
+    padding: $m-size
+
+    input[name="option"]
+      flex-grow: 1
+      background-color: $dark-blue
+      border-bottom: 0.3rem solid darken($dark-blue, 10%)
+      margin: 0 0 $s-size 0
+      color: $off-white
+      padding: $s-size
+
+@media (min-width: $desktop-breakpoint)
+  .add-option
+    
+    &__form
+      flex-direction: row
+
+    input[name="option"]
+      margin: 0 $s-size 0 0

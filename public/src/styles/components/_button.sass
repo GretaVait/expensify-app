@@ -1,0 +1,29 @@
+.big-button
+  background-color: $purple
+  border: none
+  outline: none
+  border-bottom: .6rem solid darken($purple, 10%)
+  color: white
+  font-weight: bold
+  font-size: $l-size
+  width: 100%
+  margin-bottom: $m-size
+  padding: 2.4rem
+  cursor: pointer
+
+.btn
+  font-weight: 500
+
+  &--purple
+    border-bottom: 0.3rem solid darken($purple, 10%)
+    background-color: $purple
+    color: white
+    padding: $s-size
+
+  &--link
+    color: $off-white
+    background: none
+
+@media (min-width: $desktop-breakpoint)
+  .big-button
+    margin-bottom: $xl-size
