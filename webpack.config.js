@@ -4,7 +4,7 @@ const path = require('path');
 const { forwardRef } = require('react');
 
 module.exports = {
-  entry: './public/src/app.js',
+  entry: './public/src/playground/des-es6.js',
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
