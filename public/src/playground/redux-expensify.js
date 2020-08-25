@@ -23,6 +23,16 @@ const removeExpense = ({ id } = {}) => ({
   id
 });
 
+// ---------------------- //
+// ---- EDIT_EXPENSE ---- //
+// ---------------------- //
+const editExpense = (id, updates) => ({
+  type: 'EDIT_EXPENSE',
+  id,
+  updates
+});
+
+
 // -------------------------- //
 // ---- Expenses Reducer ---- //
 // -------------------------- //
@@ -37,10 +47,31 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
       ]
     case 'REMOVE_EXPENSE':
       return state.filter(expense => expense.id !== action.id);
+    case 'EDIT_EXPENSE':
+      return state.map((expense) => {
+        if (expense.id === action.id) {
+          return {
+            //grab all props from existing expense obj (id, description etc.) and overide with new values
+            ...expense,
+            ...action.updates
+          }
+        } else {
+          return expense;
+        }
+      });
     default:
       return state;
   }
 } 
+
+// ------------------------- //
+// ---- SET_TEXT_FILTER ---- //
+// ------------------------- //
+const setTextFilter = (text = '') => ({
+  type: 'SET_TEXT_FILTER',
+  text
+});
+
 // ------------------------- //
 // ---- Filters Reducer ---- //
 // ------------------------- //
@@ -53,6 +84,11 @@ const filterReducerDefaultState = {
 
 const filterReducer = (state = filterReducerDefaultState, action) => {
   switch (action.type) {
+    case 'SET_TEXT_FILTER':
+      return {
+        ...state,
+        text: action.text
+      };
     default:
       return state;
   }
@@ -79,6 +115,11 @@ store.dispatch(removeExpense({
   id: expenseOne.expense.id
 }))
 
+store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
+
+store.dispatch(setTextFilter('rent'));
+store.dispatch(setTextFilter());
+
 // -------------- //
 // ---- Demo ---- //
 // -------------- //
@@ -97,3 +138,14 @@ const demoState = {
     endDate: undefined
   }
 }
+
+// const user = {
+//   name: 'Gret',
+//   age: 100
+// };
+
+// console.log({
+//   age: 10,
+//   ...user,
+//   location: 'Namai',
+// });
