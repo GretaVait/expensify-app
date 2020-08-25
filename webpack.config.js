@@ -4,7 +4,7 @@ const path = require('path');
 const { forwardRef } = require('react');
 
 module.exports = {
-  entry: './public/src/playground/redux-101.js',
+  entry: './public/src/playground/redux-expensify.js',
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js'
