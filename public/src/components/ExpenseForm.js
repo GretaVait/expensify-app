@@ -14,7 +14,8 @@ export default class ExpenseForm extends React.Component {
     note: '',
     amount: '',
     createdAt: moment(),
-    calendarFocused: false
+    calendarFocused: false,
+    error: ''
   };
   
   onDescriptionChange = (e) => {
@@ -33,17 +34,25 @@ export default class ExpenseForm extends React.Component {
 
   onAmountChange = (e) => {
     const inputAmount = e.target.value;
-    if (inputAmount.match(/^\d*(\.\d{0,2})?$/)) {
-      this.setState(() => ({
-        amount: inputAmount
-      }));
+    if (inputAmount.match(/^(((0)))(\.\d{0,2})?$|^((?!(0))[0-9]*)(\.\d{0,2})?$/)) {
+      if (inputAmount.match(/^\./)) {
+        this.setState(() => ({
+          amount: '0.'
+        }));
+      } else {
+        this.setState(() => ({
+          amount: inputAmount
+        }));
+      }
     }
   }
 
   onDateChange = (createdAt) => {
-    this.setState(() => ({
-      createdAt: createdAt
-    }));
+    if (createdAt) {
+      this.setState(() => ({
+        createdAt: createdAt
+      }));
+    }
   };
 
   onFocusChange = ({focused}) => {
@@ -52,10 +61,33 @@ export default class ExpenseForm extends React.Component {
     }));
   }
 
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    if (!this.state.description || !this.state.amount) {
+      // Set error state
+      this.setState(() => ({
+        error: 'Please provide description and amount!'
+      }));
+    } else {
+      // Clear the error
+      this.setState(() => ({
+        error: ''
+      }));
+      this.props.onSubmit({
+        description: this.state.description,
+        amount: parseFloat(this.state.amount) * 100,
+        createdAt: this.state.createdAt.valueOf(),
+        note: this.state.note
+      })
+    }
+  }
+
   render () {
     return (
       <div>
-        <form>
+        {this.state.error && <p>{this.state.error}</p>}
+        <form onSubmit={this.onSubmit}>
           <input type="text" placeholder="Description" autoFocus value={this.state.description} onChange={this.onDescriptionChange} />
           <input type="text" placeholder="Amount" value={this.state.amount} onChange={this.onAmountChange} />
           <SingleDatePicker
