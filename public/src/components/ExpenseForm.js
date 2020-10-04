@@ -9,14 +9,17 @@ const now = moment();
 console.log(now.format('YYYY-MM-DD'));
 
 export default class ExpenseForm extends React.Component {
-  state = {
-    description: '',
-    note: '',
-    amount: '',
-    createdAt: moment(),
-    calendarFocused: false,
-    error: ''
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      description: props.expense ? props.expense.description : '',
+      note: props.expense ? props.expense.note : '',
+      amount: props.expense ? (props.expense.amount / 100).toString() : '',
+      createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+      calendarFocused: false,
+      error: ''
+    };
+  }
   
   onDescriptionChange = (e) => {
     const inputDescription = e.target.value;
@@ -99,7 +102,7 @@ export default class ExpenseForm extends React.Component {
             isOutsideRange={ () => {false} }
           />
           <textarea placeholder="Add a note for your expense (optional)" value={this.state.note} onChange={this.onNoteChange}></textarea>
-          <button>Add Expense</button>
+          <button>{this.props.expense ? "Edit Expense" : "Add Expense"}</button>
         </form>
       </div>
     )
