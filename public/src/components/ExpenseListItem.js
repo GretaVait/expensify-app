@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import numeral from 'numeral';
+import expensesTotal from '../selectors/expenses-total';
 
 // load a locale
 numeral.register('locale', 'lt', {
