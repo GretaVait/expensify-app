@@ -14,6 +14,15 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
+// database.ref()
+//   .remove()
+//   .then(() => {
+//     console.log('successful');
+//   })
+//   .catch((e) => {
+//     console.log('This failed:', e);
+//   })
+
 
 database.ref().set({
   name: "Teddy",
@@ -29,14 +38,16 @@ database.ref().set({
   console.log('This is failed', e);
 })
 
-database.ref('age').set(420);
-database.ref('location/city').set('Kawnas');
+database.ref('isSingle').remove();
 
-database.ref('attributes').set({
-  height: 180,
-  weight: 70
-}).then(() => {
-  console.log('Successful');
-}).catch((e) => {
-  console.log('This failed:', e);
-})
+// database.ref('age').set(420);
+// database.ref('location/city').set('Kawnas');
+
+// database.ref('attributes').set({
+//   height: 180,
+//   weight: 70
+// }).then(() => {
+//   console.log('Successful');
+// }).catch((e) => {
+//   console.log('This failed:', e);
+// })
