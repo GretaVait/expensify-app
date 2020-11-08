@@ -15,16 +15,105 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
-database.ref()
-  .on('value', (snapshot) => {
-    const value = snapshot.val();
-    const { name, job: { title, company } } = value;
-    console.log(`${name} yra ${title} ir dirba ${company} kompanijoje.`)
-  })
+//child_remove
+database.ref('expenses').on('child_removed', (snapshot) => {
+  console.log(snapshot.key, snapshot.val());
+})
 
-setTimeout(() => {
-  database.ref('job/title').set('Indų plovėjas');
-}, 2000);
+//child_changed
+database.ref('expenses').on('child_changed', (snapshot) => {
+  console.log(snapshot.key, snapshot.val());
+})
+
+//child_added
+database.ref('expenses').on('child_added', (snapshot) => {
+  console.log(snapshot.key, snapshot.val())
+})
+
+// database.ref('expenses')
+//   .on('value', (snapshot) => {
+//     const expenses = [];
+//     snapshot.forEach((childSnapShot) => {
+//       expenses.push({
+//         id: childSnapShot.key,
+//         ...childSnapShot.val()
+//       })
+//     })
+
+//     console.log(expenses);
+//   })
+
+// database.ref('expenses')
+//   .once('value')
+//   .then((snapshot) => {
+//     const expenses = [];
+//     snapshot.forEach((childSnapShot) => {
+//       expenses.push({
+//         id: childSnapShot.key,
+//         ...childSnapShot.val()
+//       })
+//     })
+
+//     console.log(expenses);
+//   });
+
+// database.ref('expenses').push(
+//   {
+//     description: 'I paid for my rent',
+//     note: 'My rent',
+//     amount: 4500,
+//     createdAt: 95000
+//   }
+// )
+
+// database.ref('notes/-MLcXSOFQZJiePMMM8Ts').update({
+//   body: 'Buy ice-cream!'
+// });
+
+// database.ref('notes/-MLcXSOFQZJiePMMM8Ts').remove();
+
+// database.ref('notes').push({
+//   title: 'Course Topics',
+//   body: 'React, Vue, Angular'
+// })
+
+// const firebaseNotes = {
+//   notes: {
+//     miau: {
+//       title: 'au',
+//       body: 'wof'
+//     },
+//     miau2: {
+//       title: 'auau',
+//       body: 'wofwof'
+//     }
+//   }
+// }
+// const notes = [
+//   {
+//     id: 12,
+//     title: 'My note',
+//     body: 'Note Nr. 1'
+//   },
+//   {
+//     id: 15,
+//     title: 'My note',
+//     body: 'Note Nr. 2'
+//   }
+// ]
+
+// database.ref('notes').set(notes);
+
+// database.ref()
+//   .on('value', (snapshot) => {
+//     const value = snapshot.val();
+//     const { name, job: { title, company } } = value;
+//     console.log(`${name} yra ${title} ir dirba ${company} kompanijoje.`)
+//   })
+
+// setTimeout(() => {
+//   database.ref('job/title').set('Indų plovėjas');
+// }, 2000);
 
 // const onValueChange = database.ref()
 //   .on('value', (snapshot) => {
