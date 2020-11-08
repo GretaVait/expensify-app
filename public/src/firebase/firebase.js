@@ -14,6 +14,48 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
+
+database.ref()
+  .on('value', (snapshot) => {
+    const value = snapshot.val();
+    const { name, job: { title, company } } = value;
+    console.log(`${name} yra ${title} ir dirba ${company} kompanijoje.`)
+  })
+
+setTimeout(() => {
+  database.ref('job/title').set('Indų plovėjas');
+}, 2000);
+
+// const onValueChange = database.ref()
+//   .on('value', (snapshot) => {
+//     console.log(snapshot.val())
+//   }, (e) => {
+//     console.log("Error fetching data:", e)
+//   })
+
+// setTimeout(() => {
+//   database.ref('age').set(100);
+// }, 3500);
+
+// setTimeout(() => {
+//   database.ref().off(onValueChange);
+// }, 7000);
+
+// setTimeout(() => {
+//   database.ref('age').set(89);
+// }, 10500);
+
+// database.ref('location/city')
+//   .once('value')
+//   .then((snapshot) => {
+//     const value = snapshot.val();
+//     console.log(value);
+//   })
+//   .catch((e) => {
+//     console.log("Error fetching data:", e)
+//   })
+
+
 // database.ref()
 //   .remove()
 //   .then(() => {
@@ -24,33 +66,33 @@ const database = firebase.database();
 //   })
 
 
-database.ref().set({
-  name: "Teddy",
-  age: 22,
-  stressLevel: 999,
-  job: {
-    title: "Indų plovėjas",
-    company: "McDonalds"
-  },
-  location: {
-    city: 'Wilno',
-    country: 'Litva'
-  }
-}).then(() => {
-  console.log('data is saved');
-}).catch((e) => {
-  console.log('This is failed', e);
-})
+// database.ref().set({
+//   name: "Teddy",
+//   age: 22,
+//   stressLevel: 999,
+//   job: {
+//     title: "Indų plovėjas",
+//     company: "McDonalds"
+//   },
+//   location: {
+//     city: 'Wilno',
+//     country: 'Litva'
+//   }
+// }).then(() => {
+//   console.log('data is saved');
+// }).catch((e) => {
+//   console.log('This is failed', e);
+// })
 
-database.ref().update({
-  stressLevel: 9999999,
-  'job/company': 'Tagre',
-  'location/city': "Kawnas"
-}).then(() => {
-  console.log('Successful');
-}).catch((e) => {
-  console.log('Failed:', e)
-})
+// database.ref().update({
+//   stressLevel: 9999999,
+//   'job/company': 'Tagre',
+//   'location/city': "Kawnas"
+// }).then(() => {
+//   console.log('Successful');
+// }).catch((e) => {
+//   console.log('Failed:', e)
+// })
 
 // database.ref('isSingle').remove();
 
