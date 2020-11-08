@@ -27,7 +27,11 @@ const database = firebase.database();
 database.ref().set({
   name: "Teddy",
   age: 22,
-  isSingle: false,
+  stressLevel: 999,
+  job: {
+    title: "Indų plovėjas",
+    company: "McDonalds"
+  },
   location: {
     city: 'Wilno',
     country: 'Litva'
@@ -38,7 +42,17 @@ database.ref().set({
   console.log('This is failed', e);
 })
 
-database.ref('isSingle').remove();
+database.ref().update({
+  stressLevel: 9999999,
+  'job/company': 'Tagre',
+  'location/city': "Kawnas"
+}).then(() => {
+  console.log('Successful');
+}).catch((e) => {
+  console.log('Failed:', e)
+})
+
+// database.ref('isSingle').remove();
 
 // database.ref('age').set(420);
 // database.ref('location/city').set('Kawnas');
