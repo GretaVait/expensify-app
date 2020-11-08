@@ -6,6 +6,7 @@ import configureStore from './store/configureStore';
 import 'normalize.css/normalize.css';
 import './styles/styles.sass';
 import AppRouter from './routers/AppRouter';
+import './firebase/firebase';
 
 const store = configureStore();
 
