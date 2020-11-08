@@ -23,13 +23,20 @@ database.ref().set({
     city: 'Wilno',
     country: 'Litva'
   }
-});
+}).then(() => {
+  console.log('data is saved');
+}).catch((e) => {
+  console.log('This is failed', e);
+})
 
 database.ref('age').set(420);
-
 database.ref('location/city').set('Kawnas');
 
 database.ref('attributes').set({
   height: 180,
   weight: 70
-});
+}).then(() => {
+  console.log('Successful');
+}).catch((e) => {
+  console.log('This failed:', e);
+})
