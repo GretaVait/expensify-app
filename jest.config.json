@@ -1,0 +1,5 @@
+{
+  "setupFiles": [
+    "<rootDir>/public/src/tests/setupTests.js"
+  ]
+}
