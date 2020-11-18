@@ -9,16 +9,10 @@ const Header = ({ startLogout }) => (
     <nav>
       <ul>
         <li>
-          <NavLink to="/" activeClassName="link-active" exact={true}>Login</NavLink>
-        </li>
-        <li>
           <NavLink to="/dashboard" activeClassName="link-active">Dashboard</NavLink>
         </li>
         <li>
           <NavLink to="/create" activeClassName="link-active">Create</NavLink>
-        </li>
-        <li>
-          <NavLink to="/help" activeClassName="link-active">Help</NavLink>
         </li>
       </ul>
     </nav>
