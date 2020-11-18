@@ -1,21 +1,25 @@
-// entry -> output
-
+// Entry -> output'
 const path = require('path');
 const webpack = require('webpack');
-const { forwardRef } = require('react');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-if (process.env.NODE_ENV === 'test') {
-  require('dotenv').config({ path: '.env.test' });
-} else if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config({ path: '.env.development' });
+if(process.env.NODE_ENV === 'test') {
+  require('dotenv').config({
+    path: '.env.test'
+  });
+} else if (process.env.NODE_ENV === 'development'){
+  require('dotenv').config({
+    path: '.env.development'
+  });
 }
 
 module.exports = (env) => {
-  const isProd = env === 'production';
-  const CSSExtract = new MiniCssExtractPlugin({ filename: 'styles.css' });
+  const isProduction = env === 'production';
+  const CSSExtract = new MiniCssExtractPlugin({
+    filename: 'styles.css'
+  });
 
   return {
     entry: './public/src/app.js',
@@ -23,22 +27,20 @@ module.exports = (env) => {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
     },
-    //loader
     module: {
       rules: [{
         loader: 'babel-loader',
         test: /\.js$/,
         exclude: /node_modules/
-      },
-      {
+      }, {
         test: /\.sass$|\.css$/,
-        use: [ MiniCssExtractPlugin.loader, 
+        use: [MiniCssExtractPlugin.loader, 
           {
             loader: 'css-loader',
             options: {
               sourceMap: true
             }
-          },
+          }, 
           {
             loader: 'sass-loader',
             options: {
@@ -46,8 +48,7 @@ module.exports = (env) => {
             }
           }
         ]
-      }
-      ]
+      }]
     },
     plugins: [
       CSSExtract,
@@ -57,15 +58,15 @@ module.exports = (env) => {
         'process.env.FIREBASE_DATABASE_URL': JSON.stringify(process.env.FIREBASE_DATABASE_URL),
         'process.env.FIREBASE_PROJECT_ID': JSON.stringify(process.env.FIREBASE_PROJECT_ID),
         'process.env.FIREBASE_STORAGE_BUCKET': JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
-        'process.env.FIREBASE_SENDER_ID': JSON.stringify(process.env.FIREBASE_SENDER_ID),
-        'process.env.FIREBASE_APP_ID': JSON.stringify(process.env.FIREBASE_APP_ID),
+        'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID),
+        'process.env.FIREBASE_APP_ID': JSON.stringify(process.env.FIREBASE_APP_ID)
       })
     ],
-    devtool: isProd ? 'source-map' : 'inline-source-map',
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
       contentBase: path.join(__dirname, 'public'),
       historyApiFallback: true,
       publicPath: '/dist/'
     }
   }
-};
+}

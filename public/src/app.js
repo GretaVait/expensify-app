@@ -26,7 +26,7 @@ const renderApp = () => {
   }
 } 
 
-ReactDOM.render(<p>Loading...</p>, document.querySelector("#app"));
+ReactDOM.render(<p>Loading...123</p>, document.querySelector("#app"));
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
