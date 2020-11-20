@@ -48,6 +48,10 @@ module.exports = (env) => {
             }
           }
         ]
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader'
       }]
     },
     plugins: [
