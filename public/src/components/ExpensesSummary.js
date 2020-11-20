@@ -7,7 +7,7 @@ import selectExpenses from '../selectors/expenses';
 const ExpenseSummary = ( {expenseCount, expenseTotal} ) => {
   const expenseWord = expenseCount == 1 ? 'expense' : 'expenses';
   return (
-    <div>
+    <div className="page-header">
       <p>Viewing {expenseCount} {expenseWord} in total {numeral(expenseTotal / 100).format('$0,0.00')}</p>
     </div>
   );
