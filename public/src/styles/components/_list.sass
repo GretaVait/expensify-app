@@ -1,0 +1,52 @@
+.list-header
+  display: flex
+  justify-content: space-between
+  background-color: $light-grey
+  color: $grey
+  padding: 1.5rem 2rem
+  border: 1px solid darken($light-grey, 7%)
+
+.list-body
+  margin-bottom: 5rem
+  @media screen and ( max-width: 768px )
+    margin-bottom: 3rem
+    
+
+.list-item
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 1.5rem 2rem
+  border: 1px solid darken($light-grey, 7%)
+  border-top: none
+  color: $dark-grey
+  transition: background .3s ease
+
+  &:not(.list-item--message)
+    @media (hover: hover)
+      &:hover
+        background-color: $light-grey
+
+  &--message
+    align-items: center
+    justify-content: center
+
+  @media screen and ( max-width: 768px )
+    flex-direction: column
+    padding: 1rem
+    &:not(.list-item--message)
+      justify-content: flex-start
+      align-items: flex-start
+      
+
+  &__title
+    word-break: break-all
+    margin-bottom: 1rem
+
+  &__subtitle
+    display: inline-block
+    color: $grey
+    font-size: 1.4rem
+
+    @media screen and ( max-width: 768px )
+      margin-bottom: 2rem

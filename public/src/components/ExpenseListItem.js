@@ -19,14 +19,13 @@ numeral.register('locale', 'lt', {
 numeral.locale('lt');
 
 const ExpenseListItem = ({dispatch, id, description, amount, createdAt}) => (
-  <div>
-    <Link to={`/edit/${id}`}><h3>{description}</h3></Link>
-    <p>
-      Amount: {numeral(amount / 100).format('$0,0.00')}
-      <br />
-      Created at: {moment(createdAt).format('YYYY-MM-DD')}
-    </p>
-  </div>
+  <Link to={`/edit/${id}`} className="list-item">
+    <div>
+      <h3 className="list-item__title">{description}</h3>
+      <span className="list-item__subtitle">{moment(createdAt).format('YYYY-MM-DD')}</span>
+    </div>
+    <h3 className="list-item__data">{numeral(amount / 100).format('$0,0.00')}</h3>
+  </Link>
 );
 
 export default ExpenseListItem;
